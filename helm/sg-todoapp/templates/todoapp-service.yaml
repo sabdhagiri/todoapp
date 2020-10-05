@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp-service
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 34.105.49.85
+  selector:
+    app: todoapp
+  ports:
+    - port: 80
+      targetPort: 5000

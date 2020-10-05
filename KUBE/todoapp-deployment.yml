@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapp-deployment
+spec:
+  selector:
+    matchLabels:
+      app: todoapp
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      containers:
+      - name: todoapp
+        image: sabdhagiri/todoapp:3.0
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "1Mi"
+            cpu: "10m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                  name: todoapp-secret
+                  key: TODO_DB_PASSWORD
+          - name: DEPLOY_ENVIRONMENT
+            value: DEVELOPMENT
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+          - name: config
+            mountPath: /app/.env.dev
+            subPath: .env.dev
+      volumes:
+          - name: config
+            configMap:
+              name: todoapp-config
+              items:
+                - key: .env.dev
+                  path: .env.dev

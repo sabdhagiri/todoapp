@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMapName }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  .env.dev: |
+    DB_HOST={{ .Values.dbHost }}
+    DB_PORT=5432
+    DB_DATABASE=todoapp
+    DB_USER=todoapp
+    DEBUG=True
+    SECRET_KEY=Sup3rS3cr3t
+    SQLALCHEMY_TRACK_MODIFICATIONS=False

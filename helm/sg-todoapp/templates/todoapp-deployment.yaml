@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapp-deployment
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  selector:
+    matchLabels:
+      app: todoapp
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      containers:
+        - name: todoapp
+          image: {{ .Values.imageName }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 1Mi
+              cpu: 10m
+            limits:
+              memory: 128Mi
+              cpu: 500m
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretName }}
+                  key: TODO_DB_PASSWORD
+            - name: DEPLOY_ENVIRONMENT
+              value: DEVELOPMENT
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: config
+              mountPath: /app/.env.dev
+              subPath: .env.dev
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.configMapName }}
+            items:
+              - key: .env.dev
+                path: .env.dev
