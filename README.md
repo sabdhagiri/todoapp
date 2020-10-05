@@ -57,3 +57,8 @@ In order for the app to work, the `todoapp` database needs to be setup on the `p
 6. Now deploy the application using the helm chart by running `cd helm && helm install todoapp ./sg-todoapp`
 7. verify the deployment by running `helm ls`
 8. When the deployment is completed, navigate to the ip address of the load balancer to access the application.
+9. Add an entry to the todo and verify the replication by running the following commands
+    `kubectl -n pg exec -i postgres-0 -- psql --user todoapp --db todoapp -c "select * from todo;"`
+    `kubectl -n pg exec -i postgres-replica-0 -- psql --user todoapp --db todoapp -c "select * from todo;"`
+
+10. both should return the same output.
