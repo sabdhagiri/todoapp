@@ -3,4 +3,9 @@
 .env*
 **/__pycache__
 *.pyc
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+plugins
+*.secret.yml
 KUBE/todoapp-secret.yml
