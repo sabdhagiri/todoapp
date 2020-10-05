@@ -36,11 +36,11 @@ spec:
           ports:
             - containerPort: 5000
           livenessProbe:
-          initialDelaySeconds: 2
-          periodSeconds: 5
-          httpGet:
-            path: /healthz
-            port: 5000
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 5000
           volumeMounts:
             - name: config
               mountPath: /app/.env.dev
