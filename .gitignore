@@ -7,5 +7,5 @@
 *.tfstate
 *.tfstate.*
 plugins
-*.secret.yml
+*secret.yml
 KUBE/todoapp-secret.yml
