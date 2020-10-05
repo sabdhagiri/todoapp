@@ -19,7 +19,9 @@ you should be seeing the project in the list.
 The GKE cluster and the external static ip address used by the LB will be created using the terraform template.
 
 `cd Infrastructure/terrafrom`
+
 `terraform plan # this will show the plan to be executed and resources that will be created`
+
 `terraform apply # apply the changes to the infrastructure`
 
 You have to obtain the output values of the cluster and the external static ip as it is needed later.
@@ -54,3 +56,4 @@ In order for the app to work, the `todoapp` database needs to be setup on the `p
 5. edit the `todoapp-secret-sample.yml` to replace the password with the password used in step 3 and apply it.
 6. Now deploy the application using the helm chart by running `cd helm && helm install todoapp ./sg-todoapp`
 7. verify the deployment by running `helm ls`
+8. When the deployment is completed, navigate to the ip address of the load balancer to access the application.
