@@ -1,5 +1,3 @@
-# Gorgias SRE interview challenge
-
 ## todoapp
 
 1. Create the required Infrastructure
