@@ -35,7 +35,7 @@ def todo():
         return redirect("/")
 
 @app.route('/healthz')
-def health(foo):
+def health():
     return datetime.datetime.now()
 
 if __name__ == '__main__':

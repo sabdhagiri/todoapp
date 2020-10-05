@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-imageName: 'sabdhagiri/todoapp:4.0'
+imageName: 'sabdhagiri/todoapp:5.0'
 replicaCount: 3
 configMapName: todoapp-config
 secretName: todoapp-secret
