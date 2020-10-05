@@ -36,7 +36,7 @@ def todo():
 
 @app.route('/healthz')
 def health():
-    return datetime.datetime.now()
+    return datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
