@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, redirect
 from config import Config
 from models import db, TodoModel
 import os
+import datetime
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -32,6 +33,10 @@ def todo():
         db.session.add(todo)
         db.session.commit()
         return redirect("/")
+
+@app.route('/healthz')
+def health(foo):
+    return datetime.datetime.now()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
